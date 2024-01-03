@@ -11,10 +11,10 @@ import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "../lib/actions";
 
 export default function LoginForm() {
-  const [code, action] = useFormState(authenticate, undefined);
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (
-    <form action={action} className="space-y-3">
+    <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
@@ -62,7 +62,7 @@ export default function LoginForm() {
         </div>
         <LoginButton />
         <div className="flex h-8 items-end space-x-1">
-          {code === "CredentialsSignIn" && (
+          {errorMessage && (
             <>
               <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
